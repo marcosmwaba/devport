@@ -1,10 +1,8 @@
-
 import React, { useEffect } from 'react';
 import { motion } from 'framer-motion';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
 import HeroSection from '@/components/HeroSection';
-import ProjectsSection from '@/components/ProjectsSection';
 import SkillsSection from '@/components/SkillsSection';
 import ContactSection from '@/components/ContactSection';
 import Particles from '@/components/Particles';
@@ -72,7 +70,6 @@ const Index = () => {
         <div id="skills">
           <SkillsSection />
         </div>
-        <ProjectsSection />
         <ContactSection />
       </main>
       

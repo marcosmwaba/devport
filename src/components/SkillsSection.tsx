@@ -57,11 +57,7 @@ const SkillsSection: React.FC = () => {
       icon: <Shield className="h-5 w-5 text-terminal-pink" />,
       skills: ['Offensive Security', 'Defensive Security', 'Vulnerability Assessment', 'Network Security', 'Security Auditing']
     },
-    {
-      title: t('marketing_strategy'),
-      icon: <TrendingUp className="h-5 w-5 text-terminal-cyan" />,
-      skills: ['Digital Marketing', 'Brand Development', 'Market Analysis', 'Growth Strategies', 'Content Creation']
-    },
+    
     {
       title: t('business_leadership'),
       icon: <Award className="h-5 w-5 text-terminal-green" />,

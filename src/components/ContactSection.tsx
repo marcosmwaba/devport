@@ -1,9 +1,9 @@
-
 import React, { useState } from 'react';
 import { motion } from 'framer-motion';
 import { Terminal, CommandLine, TerminalResponse, TerminalHighlight } from './Terminal';
 import { SendHorizontal, AlertCircle, CheckCircle } from 'lucide-react';
 import { useToast } from '@/hooks/use-toast';
+import emailjs from 'emailjs-com';
 
 const ContactSection: React.FC = () => {
   const [name, setName] = useState('');
@@ -16,26 +16,41 @@ const ContactSection: React.FC = () => {
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     setIsSubmitting(true);
-    
-    // Simulate form submission
-    setTimeout(() => {
-      setIsSubmitting(false);
-      setSubmitSuccess(true);
-      
-      toast({
-        title: "Message Sent",
-        description: "Thank you for your message. I'll get back to you soon!",
-        duration: 5000,
+
+    const templateParams = {
+      name,
+      email,
+      message,
+    };
+
+    emailjs.send('service_f235864', 'template_44myyeg', templateParams, 'Z8VQ7jXNNTejhKUJS')
+      .then((response) => {
+        setIsSubmitting(false);
+        setSubmitSuccess(true);
+
+        toast({
+          title: "Message Sent",
+          description: "Thank you for your message. I'll get back to you soon!",
+          duration: 5000,
+        });
+
+        // Reset form after success
+        setName('');
+        setEmail('');
+        setMessage('');
+
+        // Reset success state after delay
+        setTimeout(() => setSubmitSuccess(false), 3000);
+      }, (error) => {
+        setIsSubmitting(false);
+        console.error('Failed to send email:', error);
+
+        toast({
+          title: "Error",
+          description: "Failed to send message. Please try again later.",
+          duration: 5000,
+        });
       });
-      
-      // Reset form after success
-      setName('');
-      setEmail('');
-      setMessage('');
-      
-      // Reset success state after delay
-      setTimeout(() => setSubmitSuccess(false), 3000);
-    }, 1500);
   };
 
   return (
@@ -143,7 +158,7 @@ const ContactSection: React.FC = () => {
           </Terminal>
           
           <div className="mt-8 text-center text-terminal-green/70">
-            <p>Alternatively, send an email directly to: <a href="mailto:developer@example.com" className="text-terminal-cyan hover:text-terminal-pink transition-colors">developer@example.com</a></p>
+            <p>Alternatively, send an email directly to: <a href="mailto:offtunedlungu@gmail.com" className="text-terminal-cyan hover:text-terminal-pink transition-colors">offtunedlungu@gmail.com</a></p>
           </div>
         </motion.div>
       </div>

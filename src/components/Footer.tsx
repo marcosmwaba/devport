@@ -20,7 +20,7 @@ const Footer: React.FC = () => {
               <span className="text-terminal-green">/&gt;</span>
               <span className="text-terminal-green/50"> © {new Date().getFullYear()}</span>
             </p>
-            <p className="text-terminal-green/50 text-sm mt-1">Designed and built with 💻</p>
+            <p className="text-terminal-green/50 text-sm mt-1">Designed and built by marcosmawba with a 💻</p>
           </motion.div>
           
           <motion.div 
@@ -30,7 +30,7 @@ const Footer: React.FC = () => {
             transition={{ duration: 0.5, delay: 0.2 }}
           >
             <a 
-              href="https://github.com" 
+              href="https://github.com/marcosmwaba" 
               target="_blank" 
               rel="noopener noreferrer" 
               className="text-terminal-green/70 hover:text-terminal-cyan transition-colors"
@@ -38,7 +38,7 @@ const Footer: React.FC = () => {
               <Github className="h-5 w-5" />
             </a>
             <a 
-              href="https://linkedin.com" 
+              href="https://www.linkedin.com/in/marcosmwaba-825219280" 
               target="_blank" 
               rel="noopener noreferrer" 
               className="text-terminal-green/70 hover:text-terminal-purple transition-colors"
@@ -54,7 +54,7 @@ const Footer: React.FC = () => {
               <Twitter className="h-5 w-5" />
             </a>
             <a 
-              href="mailto:developer@example.com" 
+              href="mailto:offtunedlungu@gmail.com" 
               className="text-terminal-green/70 hover:text-terminal-pink transition-colors"
             >
               <Mail className="h-5 w-5" />
