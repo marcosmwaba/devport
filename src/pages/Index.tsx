@@ -21,6 +21,13 @@ const Index = () => {
       duration: 5000,
     });
     
+    // Toast about Marcos Enterprise
+    toast({
+      title: "CEO & Founder",
+      description: "Peter Marcos Mwaba is the CEO of Marcos Enterprise, combining technical expertise with business leadership.",
+      duration: 7000,
+    });
+    
     // Reminder about profile image
     toast({
       title: "Profile Image Required",

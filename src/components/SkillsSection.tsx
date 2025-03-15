@@ -2,7 +2,7 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 import { Terminal, TerminalList, TerminalHighlight, CommandLine, TerminalResponse } from './Terminal';
-import { Code, Server, Database, Paintbrush, Globe, Cpu, Shield, Terminal as TerminalIcon } from 'lucide-react';
+import { Code, Server, Database, Paintbrush, Globe, Cpu, Shield, Terminal as TerminalIcon, TrendingUp, Award } from 'lucide-react';
 import { useIsMobile } from '@/hooks/use-mobile';
 
 interface SkillCategory {
@@ -54,6 +54,16 @@ const SkillsSection: React.FC = () => {
       title: 'Cybersecurity',
       icon: <Shield className="h-5 w-5 text-terminal-pink" />,
       skills: ['Offensive Security', 'Defensive Security', 'Vulnerability Assessment', 'Network Security', 'Security Auditing']
+    },
+    {
+      title: 'Marketing & Strategy',
+      icon: <TrendingUp className="h-5 w-5 text-terminal-cyan" />,
+      skills: ['Digital Marketing', 'Brand Development', 'Market Analysis', 'Growth Strategies', 'Content Creation']
+    },
+    {
+      title: 'Business Leadership',
+      icon: <Award className="h-5 w-5 text-terminal-green" />,
+      skills: ['Entrepreneurship', 'Team Management', 'Strategic Planning', 'Business Development', 'Client Relations']
     }
   ];
 

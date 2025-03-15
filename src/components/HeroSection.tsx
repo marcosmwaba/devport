@@ -11,7 +11,7 @@ const HeroSection: React.FC = () => {
   const isMobile = useIsMobile();
   const [responses, setResponses] = useState<{text: string; delay: number}[]>([
     { text: "Welcome to my terminal portfolio!", delay: 0 },
-    { text: "I'm a Software Developer and IT Support Specialist based in Lusaka, Zambia, with a strong background in software engineering.", delay: 1000 },
+    { text: "I'm a Software Developer, IT Support Specialist, and CEO of Marcos Enterprise based in Lusaka, Zambia.", delay: 1000 },
     { text: "Type 'help' to see available commands or explore the sections below.", delay: 2000 }
   ]);
 
@@ -39,7 +39,7 @@ const HeroSection: React.FC = () => {
         response = "Available commands: about, contact, projects, skills, resume, clear";
         break;
       case 'about':
-        response = "I'm Peter Marcos Mwaba, a Software Developer and IT Support Specialist based in Lusaka, Zambia. I'm passionate about creating efficient, scalable, and robust software solutions that address real-world challenges.";
+        response = "I'm Peter Marcos Mwaba, a Software Developer, IT Support Specialist, and CEO of Marcos Enterprise based in Lusaka, Zambia. I combine technical expertise with business leadership to deliver innovative solutions.";
         break;
       case 'contact':
         response = "Email: developer@example.com | LinkedIn: /in/marcosmwaba | GitHub: @marcosmwaba";
@@ -48,7 +48,7 @@ const HeroSection: React.FC = () => {
         response = "Scroll down to see my featured projects or visit my GitHub for more.";
         break;
       case 'skills':
-        response = "My technical skills include React, TypeScript, Node.js, Kali Linux, Bash/Zsh scripting, offensive and defensive security techniques, and more. Scroll down to see the complete list.";
+        response = "My technical skills include React, TypeScript, Node.js, Kali Linux, digital marketing, entrepreneurship, and more. Scroll down to see the complete list.";
         break;
       case 'resume':
         response = "You can download my resume using the button in the navigation.";
@@ -95,7 +95,7 @@ const HeroSection: React.FC = () => {
             </h1>
             
             <p className="text-lg md:text-xl text-terminal-green/80 max-w-2xl mx-auto md:mx-0">
-              Peter Marcos Mwaba | Software Developer and IT Support Specialist
+              Peter Marcos Mwaba | Software Developer, IT Specialist & CEO of Marcos Enterprise
             </p>
           </motion.div>
         </div>
@@ -127,7 +127,7 @@ const HeroSection: React.FC = () => {
           
           <div className="px-4 mb-8 text-sm md:text-base text-terminal-green/90">
             <p className="mb-4">
-              I'm a Software Developer and IT Support Specialist based in Lusaka, Zambia, with a strong background in software engineering. I am passionate about creating efficient, scalable, and robust software solutions that address real-world challenges. My work is rooted in solving complex problems through well-structured, high-quality code and system design.
+              I'm a Software Developer, IT Support Specialist, and CEO of Marcos Enterprise based in Lusaka, Zambia, with a strong background in software engineering. I am passionate about creating efficient, scalable, and robust software solutions that address real-world challenges. My work is rooted in solving complex problems through well-structured, high-quality code and system design.
             </p>
             <p className="mb-4">
               In addition to software development, I provide IT support services, ensuring smooth operation and maintenance of systems. I have experience troubleshooting technical issues, optimizing workflows, and enhancing system performance. Whether working on backend systems, databases, or providing hands-on support, I strive to deliver reliable and impactful solutions.
