@@ -4,6 +4,7 @@ import { motion } from 'framer-motion';
 import { Terminal, TerminalList, TerminalHighlight, CommandLine, TerminalResponse } from './Terminal';
 import { Code, Server, Database, Paintbrush, Globe, Cpu, Shield, Terminal as TerminalIcon, TrendingUp, Award } from 'lucide-react';
 import { useIsMobile } from '@/hooks/use-mobile';
+import { useLanguage } from '@/contexts/LanguageContext';
 
 interface SkillCategory {
   title: string;
@@ -13,55 +14,56 @@ interface SkillCategory {
 
 const SkillsSection: React.FC = () => {
   const isMobile = useIsMobile();
+  const { t } = useLanguage();
   
   const skillCategories: SkillCategory[] = [
     {
-      title: 'Frontend Development',
+      title: t('frontend_dev'),
       icon: <Code className="h-5 w-5 text-terminal-cyan" />,
       skills: ['React.js', 'TypeScript', 'Next.js', 'Tailwind CSS', 'Redux']
     },
     {
-      title: 'Backend Development',
+      title: t('backend_dev'),
       icon: <Server className="h-5 w-5 text-terminal-purple" />,
       skills: ['Node.js', 'Express', 'REST APIs', 'GraphQL', 'Authentication']
     },
     {
-      title: 'Database',
+      title: t('database'),
       icon: <Database className="h-5 w-5 text-terminal-pink" />,
       skills: ['MongoDB', 'PostgreSQL', 'Firebase', 'Prisma ORM', 'Data Modeling']
     },
     {
-      title: 'Design & UI',
+      title: t('design_ui'),
       icon: <Paintbrush className="h-5 w-5 text-terminal-green" />,
       skills: ['Figma', 'Responsive Design', 'UI Animation', 'Design Systems', 'Accessibility']
     },
     {
-      title: 'DevOps & Deployment',
+      title: t('devops_deployment'),
       icon: <Globe className="h-5 w-5 text-terminal-cyan" />,
       skills: ['Git/GitHub', 'CI/CD', 'AWS', 'Docker', 'Vercel']
     },
     {
-      title: 'Performance & Testing',
+      title: t('perf_testing'),
       icon: <Cpu className="h-5 w-5 text-terminal-purple" />,
       skills: ['Web Vitals', 'Lighthouse', 'Jest', 'React Testing Library', 'E2E Testing']
     },
     {
-      title: 'Linux & Bash',
+      title: t('linux_bash'),
       icon: <TerminalIcon className="h-5 w-5 text-terminal-green" />,
       skills: ['Kali Linux', 'Bash/Zsh Scripting', 'Shell Automation', 'System Administration', 'CLI Tools']
     },
     {
-      title: 'Cybersecurity',
+      title: t('cybersecurity'),
       icon: <Shield className="h-5 w-5 text-terminal-pink" />,
       skills: ['Offensive Security', 'Defensive Security', 'Vulnerability Assessment', 'Network Security', 'Security Auditing']
     },
     {
-      title: 'Marketing & Strategy',
+      title: t('marketing_strategy'),
       icon: <TrendingUp className="h-5 w-5 text-terminal-cyan" />,
       skills: ['Digital Marketing', 'Brand Development', 'Market Analysis', 'Growth Strategies', 'Content Creation']
     },
     {
-      title: 'Business Leadership',
+      title: t('business_leadership'),
       icon: <Award className="h-5 w-5 text-terminal-green" />,
       skills: ['Entrepreneurship', 'Team Management', 'Strategic Planning', 'Business Development', 'Client Relations']
     }
@@ -77,7 +79,7 @@ const SkillsSection: React.FC = () => {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5 }}
           >
-            Technical Arsenal
+            {t('tech_arsenal')}
           </motion.h2>
           
           <Terminal className="max-w-3xl mx-auto">

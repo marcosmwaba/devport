@@ -3,8 +3,11 @@ import React from 'react';
 import { motion } from 'framer-motion';
 import ProjectCard from './ProjectCard';
 import { Terminal, CommandLine, TerminalResponse } from './Terminal';
+import { useLanguage } from '@/contexts/LanguageContext';
 
 const ProjectsSection: React.FC = () => {
+  const { t } = useLanguage();
+  
   const projects = [
     {
       title: "E-Commerce Platform",
@@ -66,7 +69,7 @@ const ProjectsSection: React.FC = () => {
           transition={{ duration: 0.5 }}
         >
           <h2 className="text-3xl font-bold mb-4 inline-block text-terminal-cyan glow-text">
-            Project Showcase
+            {t('project_showcase')}
           </h2>
           
           <Terminal className="max-w-3xl mx-auto mb-8">

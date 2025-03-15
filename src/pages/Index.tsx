@@ -9,9 +9,11 @@ import SkillsSection from '@/components/SkillsSection';
 import ContactSection from '@/components/ContactSection';
 import Particles from '@/components/Particles';
 import { useToast } from '@/hooks/use-toast';
+import { useLanguage } from '@/contexts/LanguageContext';
 
 const Index = () => {
   const { toast } = useToast();
+  const { language } = useLanguage();
 
   useEffect(() => {
     // Welcome toast on initial load
@@ -35,6 +37,23 @@ const Index = () => {
       duration: 10000,
     });
   }, [toast]);
+
+  // Language change toast
+  useEffect(() => {
+    const langNames = {
+      en: 'English',
+      fr: 'French',
+      zh: 'Chinese',
+      es: 'Spanish',
+      ko: 'Korean'
+    };
+    
+    toast({
+      title: "Language Changed",
+      description: `The portfolio is now displayed in ${langNames[language as keyof typeof langNames]}.`,
+      duration: 3000,
+    });
+  }, [language, toast]);
 
   return (
     <motion.div

@@ -2,10 +2,13 @@
 import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Menu, X, Terminal as TerminalIcon, Home, Code, UserCircle, Mail, Download } from 'lucide-react';
+import LanguageSelector from './LanguageSelector';
+import { useLanguage } from '@/contexts/LanguageContext';
 
 const Navbar: React.FC = () => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const { t } = useLanguage();
 
   useEffect(() => {
     const handleScroll = () => {
@@ -21,10 +24,10 @@ const Navbar: React.FC = () => {
   };
 
   const navLinks = [
-    { name: 'Home', href: '#', icon: <Home className="h-4 w-4" /> },
-    { name: 'Projects', href: '#projects', icon: <Code className="h-4 w-4" /> },
-    { name: 'Skills', href: '#skills', icon: <UserCircle className="h-4 w-4" /> },
-    { name: 'Contact', href: '#contact', icon: <Mail className="h-4 w-4" /> },
+    { name: t('home'), href: '#', icon: <Home className="h-4 w-4" /> },
+    { name: t('projects'), href: '#projects', icon: <Code className="h-4 w-4" /> },
+    { name: t('skills'), href: '#skills', icon: <UserCircle className="h-4 w-4" /> },
+    { name: t('contact'), href: '#contact', icon: <Mail className="h-4 w-4" /> },
   ];
 
   return (
@@ -65,11 +68,13 @@ const Navbar: React.FC = () => {
                 className="bg-terminal-gray/20 text-terminal-cyan px-3 py-1.5 rounded-md border border-terminal-cyan/30 hover:bg-terminal-cyan/10 transition-colors flex items-center gap-1.5"
               >
                 <Download className="h-4 w-4" />
-                <span>Resume</span>
+                <span>{t('resume')}</span>
               </a>
+              <LanguageSelector />
             </div>
             
-            <div className="md:hidden">
+            <div className="md:hidden flex items-center gap-4">
+              <LanguageSelector />
               <button
                 onClick={toggleMobileMenu}
                 className="text-terminal-green hover:text-terminal-cyan"
@@ -118,7 +123,7 @@ const Navbar: React.FC = () => {
                 transition={{ delay: navLinks.length * 0.1 }}
               >
                 <Download className="h-5 w-5" />
-                <span>Download Resume</span>
+                <span>{t('resume')}</span>
               </motion.a>
             </div>
           </motion.div>

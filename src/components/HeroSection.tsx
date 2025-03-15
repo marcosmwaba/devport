@@ -5,29 +5,35 @@ import { Terminal, CommandLine, TerminalResponse, TerminalHighlight } from './Te
 import { ArrowRight, FileCode, Github, Linkedin, Mail, Download } from 'lucide-react';
 import { Avatar, AvatarImage, AvatarFallback } from '@/components/ui/avatar';
 import { useIsMobile } from '@/hooks/use-mobile';
+import { useLanguage } from '@/contexts/LanguageContext';
 
 const HeroSection: React.FC = () => {
   const [command, setCommand] = useState<string>('');
   const isMobile = useIsMobile();
-  const [responses, setResponses] = useState<{text: string; delay: number}[]>([
-    { text: "Welcome to my terminal portfolio!", delay: 0 },
-    { text: "I'm a Software Developer, IT Support Specialist, and CEO of Marcos Enterprise based in Lusaka, Zambia.", delay: 1000 },
-    { text: "Type 'help' to see available commands or explore the sections below.", delay: 2000 }
-  ]);
+  const { t } = useLanguage();
+  
+  const [responses, setResponses] = useState<{text: string; delay: number}[]>([]);
 
   useEffect(() => {
+    // Reset responses when language changes
+    setResponses([
+      { text: t('welcome'), delay: 0 },
+      { text: t('bio_intro'), delay: 1000 },
+      { text: t('bio_help'), delay: 2000 }
+    ]);
+    
     const timer = setTimeout(() => {
       setResponses(prev => [
         ...prev,
         { 
-          text: "System initialized and ready. Portfolio v2.1.0 loaded successfully.", 
+          text: t('sys_initialized'), 
           delay: 3000 
         }
       ]);
     }, 3000);
     
     return () => clearTimeout(timer);
-  }, []);
+  }, [t]);
 
   const handleCommand = (cmd: string) => {
     setCommand(cmd);
@@ -36,28 +42,28 @@ const HeroSection: React.FC = () => {
     
     switch (cmd.toLowerCase()) {
       case 'help':
-        response = "Available commands: about, contact, projects, skills, resume, clear";
+        response = t('help_cmd');
         break;
       case 'about':
-        response = "I'm Peter Marcos Mwaba, a Software Developer, IT Support Specialist, and CEO of Marcos Enterprise based in Lusaka, Zambia. I combine technical expertise with business leadership to deliver innovative solutions.";
+        response = t('about_cmd');
         break;
       case 'contact':
-        response = "Email: developer@example.com | LinkedIn: /in/marcosmwaba | GitHub: @marcosmwaba";
+        response = t('contact_cmd');
         break;
       case 'projects':
-        response = "Scroll down to see my featured projects or visit my GitHub for more.";
+        response = t('projects_cmd');
         break;
       case 'skills':
-        response = "My technical skills include React, TypeScript, Node.js, Kali Linux, digital marketing, entrepreneurship, and more. Scroll down to see the complete list.";
+        response = t('skills_cmd');
         break;
       case 'resume':
-        response = "You can download my resume using the button in the navigation.";
+        response = t('resume_cmd');
         break;
       case 'clear':
         setResponses([]);
         return;
       default:
-        response = `Command not found: ${cmd}. Type 'help' to see available commands.`;
+        response = t('cmd_not_found').replace('{0}', cmd);
     }
     
     setResponses(prev => [...prev, { text: response, delay: 0 }]);
@@ -145,7 +151,7 @@ const HeroSection: React.FC = () => {
               whileTap={{ scale: 0.95 }}
             >
               <FileCode className="h-5 w-5" />
-              <span>View Projects</span>
+              <span>{t('view_projects')}</span>
               <ArrowRight className="h-4 w-4" />
             </motion.a>
             
