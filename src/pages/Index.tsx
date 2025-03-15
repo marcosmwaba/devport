@@ -24,7 +24,7 @@ const Index = () => {
     // Reminder about profile image
     toast({
       title: "Profile Image Required",
-      description: "Please upload a profile image to /public/profile-image.jpg for the avatar to display correctly.",
+      description: "Please upload a square profile image (recommended size: 400x400px) to /public/profile-image.jpg for the avatar to display correctly.",
       duration: 10000,
     });
   }, [toast]);
@@ -41,7 +41,7 @@ const Index = () => {
       
       <Navbar />
       
-      <main>
+      <main className="overflow-x-hidden">
         <HeroSection />
         <div id="skills">
           <SkillsSection />

@@ -2,7 +2,8 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 import { Terminal, TerminalList, TerminalHighlight, CommandLine, TerminalResponse } from './Terminal';
-import { Code, Server, Database, Paintbrush, Globe, Cpu } from 'lucide-react';
+import { Code, Server, Database, Paintbrush, Globe, Cpu, Shield, Terminal as TerminalIcon } from 'lucide-react';
+import { useIsMobile } from '@/hooks/use-mobile';
 
 interface SkillCategory {
   title: string;
@@ -11,6 +12,8 @@ interface SkillCategory {
 }
 
 const SkillsSection: React.FC = () => {
+  const isMobile = useIsMobile();
+  
   const skillCategories: SkillCategory[] = [
     {
       title: 'Frontend Development',
@@ -41,15 +44,25 @@ const SkillsSection: React.FC = () => {
       title: 'Performance & Testing',
       icon: <Cpu className="h-5 w-5 text-terminal-purple" />,
       skills: ['Web Vitals', 'Lighthouse', 'Jest', 'React Testing Library', 'E2E Testing']
+    },
+    {
+      title: 'Linux & Bash',
+      icon: <TerminalIcon className="h-5 w-5 text-terminal-green" />,
+      skills: ['Kali Linux', 'Bash/Zsh Scripting', 'Shell Automation', 'System Administration', 'CLI Tools']
+    },
+    {
+      title: 'Cybersecurity',
+      icon: <Shield className="h-5 w-5 text-terminal-pink" />,
+      skills: ['Offensive Security', 'Defensive Security', 'Vulnerability Assessment', 'Network Security', 'Security Auditing']
     }
   ];
 
   return (
-    <section className="py-16">
-      <div className="container mx-auto">
-        <div className="mb-12 text-center">
+    <section className="py-12 md:py-16">
+      <div className="container mx-auto px-4">
+        <div className="mb-8 md:mb-12 text-center">
           <motion.h2 
-            className="text-3xl font-bold mb-4 inline-block text-terminal-cyan glow-text"
+            className="text-2xl md:text-3xl font-bold mb-4 inline-block text-terminal-cyan glow-text"
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5 }}
@@ -66,11 +79,11 @@ const SkillsSection: React.FC = () => {
               className="mb-4" 
             />
             
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3 md:gap-4 p-2 md:p-4">
               {skillCategories.map((category, index) => (
                 <motion.div 
                   key={index}
-                  className="mb-4"
+                  className="mb-3 md:mb-4"
                   initial={{ opacity: 0, y: 20 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ delay: index * 0.1, duration: 0.5 }}
