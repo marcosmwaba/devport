@@ -17,8 +17,15 @@ const Index = () => {
     // Welcome toast on initial load
     toast({
       title: "Terminal Connection Established",
-      description: "Welcome to my developer portfolio. Type 'help' in the terminal for commands.",
+      description: "Welcome to Peter Marcos Mwaba's portfolio. Type 'help' in the terminal for commands.",
       duration: 5000,
+    });
+    
+    // Reminder about profile image
+    toast({
+      title: "Profile Image Required",
+      description: "Please upload a profile image to /public/profile-image.jpg for the avatar to display correctly.",
+      duration: 10000,
     });
   }, [toast]);
 

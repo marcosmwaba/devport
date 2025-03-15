@@ -3,6 +3,7 @@ import React, { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { Terminal, CommandLine, TerminalResponse, TerminalHighlight } from './Terminal';
 import { ArrowRight, FileCode, Github, Linkedin, Mail, Download } from 'lucide-react';
+import { Avatar, AvatarImage, AvatarFallback } from '@/components/ui/avatar';
 
 const HeroSection: React.FC = () => {
   const [command, setCommand] = useState<string>('');
@@ -36,10 +37,10 @@ const HeroSection: React.FC = () => {
         response = "Available commands: about, contact, projects, skills, resume, clear";
         break;
       case 'about':
-        response = "I'm a passionate developer with expertise in modern web technologies. I love building intuitive, performant applications that solve real-world problems.";
+        response = "I'm Peter Marcos Mwaba, a passionate developer with expertise in modern web technologies. I love building intuitive, performant applications that solve real-world problems.";
         break;
       case 'contact':
-        response = "Email: developer@example.com | LinkedIn: /in/developer | GitHub: @developer";
+        response = "Email: developer@example.com | LinkedIn: /in/marcosmwaba | GitHub: @marcosmwaba";
         break;
       case 'projects':
         response = "Scroll down to see my featured projects or visit my GitHub for more.";
@@ -63,22 +64,39 @@ const HeroSection: React.FC = () => {
   return (
     <section className="min-h-screen flex flex-col justify-center items-center pt-16 pb-32 relative">
       <div className="container mx-auto px-4">
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8 }}
-          className="text-center mb-10"
-        >
-          <h1 className="text-4xl md:text-6xl font-bold mb-6 text-terminal-cyan glow-text">
-            <span className="text-terminal-green">&lt;</span>
-            Developer<TerminalHighlight color="text-terminal-pink">.</TerminalHighlight>Portfolio
-            <span className="text-terminal-green">/&gt;</span>
-          </h1>
+        <div className="flex flex-col md:flex-row items-center justify-center gap-8 mb-10">
+          <motion.div
+            initial={{ opacity: 0, scale: 0.8 }}
+            animate={{ opacity: 1, scale: 1 }}
+            transition={{ duration: 0.5 }}
+            className="relative"
+          >
+            <Avatar className="w-40 h-40 border-4 border-terminal-cyan/30">
+              <AvatarImage src="/profile-image.jpg" alt="Peter Marcos Mwaba" />
+              <AvatarFallback className="bg-terminal-gray/30 text-terminal-green text-4xl">
+                PM
+              </AvatarFallback>
+            </Avatar>
+            <div className="absolute inset-0 rounded-full border-2 border-terminal-cyan/50 glow-text pointer-events-none"></div>
+          </motion.div>
           
-          <p className="text-xl text-terminal-green/80 max-w-2xl mx-auto">
-            Full-Stack Developer specializing in crafting modern, performant web applications
-          </p>
-        </motion.div>
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8 }}
+            className="text-center md:text-left"
+          >
+            <h1 className="text-4xl md:text-6xl font-bold mb-6 text-terminal-cyan glow-text">
+              <span className="text-terminal-green">&lt;</span>
+              marcosmwaba<TerminalHighlight color="text-terminal-pink">.</TerminalHighlight>dev
+              <span className="text-terminal-green">/&gt;</span>
+            </h1>
+            
+            <p className="text-xl text-terminal-green/80 max-w-2xl mx-auto md:mx-0">
+              Peter Marcos Mwaba | Full-Stack Developer specializing in crafting modern, performant web applications
+            </p>
+          </motion.div>
+        </div>
         
         <motion.div
           initial={{ opacity: 0, y: 20 }}
@@ -119,7 +137,7 @@ const HeroSection: React.FC = () => {
             
             <div className="flex space-x-3">
               <motion.a
-                href="https://github.com"
+                href="https://github.com/marcosmwaba"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="p-2 bg-terminal-gray/20 text-terminal-green rounded-full border border-terminal-green/30 hover:bg-terminal-green/10 transition-colors"
@@ -130,7 +148,7 @@ const HeroSection: React.FC = () => {
               </motion.a>
               
               <motion.a
-                href="https://linkedin.com"
+                href="https://linkedin.com/in/marcosmwaba"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="p-2 bg-terminal-gray/20 text-terminal-purple rounded-full border border-terminal-purple/30 hover:bg-terminal-purple/10 transition-colors"

@@ -50,6 +50,9 @@ const ContactSection: React.FC = () => {
           <h2 className="text-3xl font-bold mb-4 inline-block text-terminal-cyan glow-text">
             Initialize Communication
           </h2>
+          <p className="text-terminal-green/80 max-w-2xl mx-auto">
+            Want to work with Peter Marcos Mwaba? Send a message through the terminal below or reach out directly via email.
+          </p>
         </motion.div>
         
         <motion.div
