@@ -1,73 +1,17 @@
+
 import React, { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
-import { Terminal, CommandLine, TerminalResponse, TerminalHighlight } from './Terminal';
+import { TerminalHighlight } from './Terminal';
+import EnhancedTerminal from './EnhancedTerminal';
 import { ArrowRight, FileCode, Github, Linkedin, Mail, Download } from 'lucide-react';
 import { Avatar, AvatarImage, AvatarFallback } from '@/components/ui/avatar';
 import { useIsMobile } from '@/hooks/use-mobile';
 import { useLanguage } from '@/contexts/LanguageContext';
 
 const HeroSection: React.FC = () => {
-  const [command, setCommand] = useState<string>('');
   const isMobile = useIsMobile();
   const { t } = useLanguage();
   
-  const [responses, setResponses] = useState<{text: string; delay: number}[]>([]);
-
-  useEffect(() => {
-    // Reset responses when language changes
-    setResponses([
-      { text: t('welcome'), delay: 0 },
-      { text: t('bio_intro'), delay: 1000 },
-      { text: t('bio_help'), delay: 2000 }
-    ]);
-    
-    const timer = setTimeout(() => {
-      setResponses(prev => [
-        ...prev,
-        { 
-          text: t('sys_initialized'), 
-          delay: 3000 
-        }
-      ]);
-    }, 3000);
-    
-    return () => clearTimeout(timer);
-  }, [t]);
-
-  const handleCommand = (cmd: string) => {
-    setCommand(cmd);
-    
-    let response = "";
-    
-    switch (cmd.toLowerCase()) {
-      case 'help':
-        response = t('help_cmd');
-        break;
-      case 'about':
-        response = t('about_cmd');
-        break;
-      case 'contact':
-        response = t('contact_cmd');
-        break;
-      case 'projects':
-        response = t('projects_cmd');
-        break;
-      case 'skills':
-        response = t('skills_cmd');
-        break;
-      case 'resume':
-        response = t('resume_cmd');
-        break;
-      case 'clear':
-        setResponses([]);
-        return;
-      default:
-        response = t('cmd_not_found').replace('{0}', cmd);
-    }
-    
-    setResponses(prev => [...prev, { text: response, delay: 0 }]);
-  };
-
   return (
     <section className="min-h-screen flex flex-col justify-center items-center pt-16 pb-16 md:pb-32 relative">
       <div className="container mx-auto px-4">
@@ -111,24 +55,7 @@ const HeroSection: React.FC = () => {
           transition={{ delay: 0.3, duration: 0.8 }}
           className="max-w-3xl mx-auto"
         >
-          <Terminal className="mb-8">
-            <div className="max-h-[250px] md:max-h-[350px] overflow-y-auto p-2 md:p-4">
-              {responses.map((response, index) => (
-                <TerminalResponse 
-                  key={index} 
-                  text={response.text} 
-                  typing={true} 
-                  delay={response.delay} 
-                  className="mb-2"
-                />
-              ))}
-              <CommandLine 
-                prefix="guest@portfolio:~$" 
-                onEnter={handleCommand} 
-                autoFocus 
-              />
-            </div>
-          </Terminal>
+          <EnhancedTerminal />
           
           <div className="px-4 mb-8 text-sm md:text-base text-terminal-green/90">
             <p className="mb-4">

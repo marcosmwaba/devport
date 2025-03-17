@@ -1,7 +1,7 @@
 
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect, useRef, KeyboardEvent } from 'react';
 import { motion } from 'framer-motion';
-import { Command } from 'lucide-react';
+import { Command, Terminal as TerminalIcon, ChevronRight } from 'lucide-react';
 
 interface TerminalProps {
   children?: React.ReactNode;
@@ -31,6 +31,9 @@ interface CommandLineProps {
   className?: string;
   autoFocus?: boolean;
   readOnly?: boolean;
+  availableCommands?: string[];
+  history?: string[];
+  onHistoryUpdate?: (updatedHistory: string[]) => void;
 }
 
 export const CommandLine: React.FC<CommandLineProps> = ({ 
@@ -39,9 +42,16 @@ export const CommandLine: React.FC<CommandLineProps> = ({
   onEnter, 
   className,
   autoFocus = false,
-  readOnly = false
+  readOnly = false,
+  availableCommands = [],
+  history = [],
+  onHistoryUpdate
 }) => {
   const [command, setCommand] = useState(initialCommand);
+  const [historyIndex, setHistoryIndex] = useState(-1);
+  const [suggestions, setSuggestions] = useState<string[]>([]);
+  const [showSuggestions, setShowSuggestions] = useState(false);
+  const [selectedSuggestion, setSelectedSuggestion] = useState(-1);
   const inputRef = useRef<HTMLInputElement>(null);
 
   useEffect(() => {
@@ -50,28 +60,173 @@ export const CommandLine: React.FC<CommandLineProps> = ({
     }
   }, [autoFocus]);
 
+  const updateSuggestions = (input: string) => {
+    if (!input.trim()) {
+      setSuggestions([]);
+      setShowSuggestions(false);
+      return;
+    }
+    
+    const filtered = availableCommands.filter(cmd => 
+      cmd.toLowerCase().startsWith(input.toLowerCase())
+    );
+    
+    setSuggestions(filtered);
+    setShowSuggestions(filtered.length > 0);
+    setSelectedSuggestion(-1);
+  };
+
+  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const newValue = e.target.value;
+    setCommand(newValue);
+    updateSuggestions(newValue);
+  };
+
   const handleKeyDown = (e: React.KeyboardEvent) => {
-    if (e.key === 'Enter' && onEnter) {
-      onEnter(command);
-      setCommand('');
+    // Handle Enter key
+    if (e.key === 'Enter') {
+      if (selectedSuggestion >= 0 && suggestions.length > 0) {
+        // Use selected suggestion
+        const selectedCommand = suggestions[selectedSuggestion];
+        setCommand(selectedCommand);
+        setSuggestions([]);
+        setShowSuggestions(false);
+        
+        if (onEnter) {
+          onEnter(selectedCommand);
+          
+          // Update command history
+          if (onHistoryUpdate && selectedCommand.trim() !== '') {
+            const newHistory = [...history.filter(cmd => cmd !== selectedCommand), selectedCommand];
+            onHistoryUpdate(newHistory.slice(-50)); // Keep last 50 commands
+          }
+        }
+      } else if (onEnter) {
+        onEnter(command);
+        
+        // Update command history
+        if (onHistoryUpdate && command.trim() !== '') {
+          const newHistory = [...history.filter(cmd => cmd !== command), command];
+          onHistoryUpdate(newHistory.slice(-50)); // Keep last 50 commands
+        }
+        
+        setCommand('');
+        setSuggestions([]);
+        setShowSuggestions(false);
+      }
+      setHistoryIndex(-1);
+      return;
+    }
+    
+    // Handle Up arrow - navigate command history
+    if (e.key === 'ArrowUp') {
+      e.preventDefault();
+      if (showSuggestions && suggestions.length > 0) {
+        // Navigate through suggestions
+        setSelectedSuggestion(prev => 
+          prev <= 0 ? suggestions.length - 1 : prev - 1
+        );
+      } else if (history.length > 0) {
+        // Navigate through history
+        const newIndex = historyIndex < history.length - 1 ? historyIndex + 1 : historyIndex;
+        setHistoryIndex(newIndex);
+        if (newIndex >= 0 && newIndex < history.length) {
+          setCommand(history[history.length - 1 - newIndex]);
+        }
+      }
+      return;
+    }
+    
+    // Handle Down arrow - navigate command history
+    if (e.key === 'ArrowDown') {
+      e.preventDefault();
+      if (showSuggestions && suggestions.length > 0) {
+        // Navigate through suggestions
+        setSelectedSuggestion(prev => 
+          prev >= suggestions.length - 1 ? 0 : prev + 1
+        );
+      } else if (historyIndex > 0) {
+        // Navigate through history
+        const newIndex = historyIndex - 1;
+        setHistoryIndex(newIndex);
+        setCommand(history[history.length - 1 - newIndex]);
+      } else if (historyIndex === 0) {
+        // Clear command when reaching the end of history
+        setHistoryIndex(-1);
+        setCommand('');
+      }
+      return;
+    }
+    
+    // Handle Tab key for autocompletion
+    if (e.key === 'Tab') {
+      e.preventDefault();
+      if (suggestions.length > 0) {
+        // Use first suggestion or selected suggestion
+        const suggestionToUse = selectedSuggestion >= 0 ? 
+          suggestions[selectedSuggestion] : suggestions[0];
+        setCommand(suggestionToUse);
+        setSuggestions([]);
+        setShowSuggestions(false);
+      }
+      return;
+    }
+    
+    // Handle Escape key to close suggestions
+    if (e.key === 'Escape') {
+      setSuggestions([]);
+      setShowSuggestions(false);
+      setSelectedSuggestion(-1);
+      return;
+    }
+    
+    // Reset history index on any other key
+    if (e.key !== 'ArrowUp' && e.key !== 'ArrowDown') {
+      setHistoryIndex(-1);
     }
   };
 
   return (
-    <div className={`flex items-center gap-2 ${className} my-1`} onClick={() => inputRef.current?.focus()}>
-      <span className="text-terminal-green font-bold">{prefix}</span>
-      {readOnly ? (
-        <div className="flex-1 text-terminal-cyan">{command}</div>
-      ) : (
-        <input
-          ref={inputRef}
-          type="text"
-          value={command}
-          onChange={(e) => setCommand(e.target.value)}
-          onKeyDown={handleKeyDown}
-          className="flex-1 bg-transparent text-terminal-cyan outline-none border-none focus:ring-0"
-          autoFocus={autoFocus}
-        />
+    <div className={`${className} my-1 relative`} onClick={() => inputRef.current?.focus()}>
+      <div className="flex items-center gap-2">
+        <span className="text-terminal-green font-bold">{prefix}</span>
+        {readOnly ? (
+          <div className="flex-1 text-terminal-cyan">{command}</div>
+        ) : (
+          <input
+            ref={inputRef}
+            type="text"
+            value={command}
+            onChange={handleInputChange}
+            onKeyDown={handleKeyDown}
+            className="flex-1 bg-transparent text-terminal-cyan outline-none border-none focus:ring-0"
+            autoFocus={autoFocus}
+            autoComplete="off"
+          />
+        )}
+      </div>
+      
+      {/* Command suggestions */}
+      {showSuggestions && suggestions.length > 0 && (
+        <div className="absolute z-10 mt-1 bg-terminal-gray/90 border border-terminal-green/30 rounded-md w-full max-h-[200px] overflow-y-auto">
+          {suggestions.map((suggestion, index) => (
+            <div
+              key={suggestion}
+              className={`px-3 py-1 flex items-center gap-2 ${
+                index === selectedSuggestion ? 'bg-terminal-green/20 text-terminal-cyan' : 'text-terminal-green'
+              } cursor-pointer hover:bg-terminal-green/10`}
+              onClick={() => {
+                setCommand(suggestion);
+                setSuggestions([]);
+                setShowSuggestions(false);
+                if (inputRef.current) inputRef.current.focus();
+              }}
+            >
+              {index === selectedSuggestion && <ChevronRight className="h-3 w-3" />}
+              <span>{suggestion}</span>
+            </div>
+          ))}
+        </div>
       )}
     </div>
   );
