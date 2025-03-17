@@ -29,5 +29,10 @@
   "projects_cmd": "Scroll down to see my featured projects or visit my GitHub for more.",
   "skills_cmd": "My technical skills include React, TypeScript, Node.js, Kali Linux, digital marketing, entrepreneurship, and more. Scroll down to see the complete list.",
   "resume_cmd": "You can download my resume using the button in the navigation.",
-  "cmd_not_found": "Command not found: {0}. Type 'help' to see available commands."
+  "cmd_not_found": "Command not found: {0}. Type 'help' to see available commands.",
+  "chatbot_greeting": "Hello! I'm Peter's virtual assistant. How can I help you today?",
+  "chatbot_prompt": "Ask me questions about Peter's experience, skills, or projects!",
+  "chatbot_skills": "Peter is skilled in frontend development with React, TypeScript, and Tailwind CSS. He's also proficient in backend technologies like Node.js, and has experience with Linux systems and cybersecurity. Would you like to know more about any specific skill?",
+  "chatbot_contact": "You can contact Peter via email at offtunedlungu@gmail.com, or connect with him on LinkedIn at /in/marcosmwaba. Is there something specific you'd like to discuss with him?",
+  "chatbot_default": "I don't have specific information about that. Would you like to know about Peter's skills, experience, or how to contact him?"
 }

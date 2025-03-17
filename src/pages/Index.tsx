@@ -7,6 +7,7 @@ import HeroSection from '@/components/HeroSection';
 import SkillsSection from '@/components/SkillsSection';
 import ContactSection from '@/components/ContactSection';
 import Particles from '@/components/Particles';
+import Chatbot from '@/components/Chatbot';
 import { useToast } from '@/hooks/use-toast';
 import { useLanguage } from '@/contexts/LanguageContext';
 
@@ -75,6 +76,7 @@ const Index = () => {
       </main>
       
       <Footer />
+      <Chatbot />
     </motion.div>
   );
 };
