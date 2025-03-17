@@ -25,7 +25,7 @@
   "resume": "Resume",
   "help_cmd": "Available commands: about, contact, projects, skills, resume, clear",
   "about_cmd": "I'm Peter Marcos Mwaba, a Software Developer, IT Support Specialist, and CEO of Marcos Enterprise based in Lusaka, Zambia. I combine technical expertise with business leadership to deliver innovative solutions.",
-  "contact_cmd": "Email: developer@example.com | LinkedIn: /in/marcosmwaba | GitHub: @marcosmwaba",
+  "contact_cmd": "Email: offtunedlungu@gmail.com | WhatsApp/Phone: +260971169255 | LinkedIn: /in/marcosmwaba | GitHub: @marcosmwaba",
   "projects_cmd": "Scroll down to see my featured projects or visit my GitHub for more.",
   "skills_cmd": "My technical skills include React, TypeScript, Node.js, Kali Linux, digital marketing, entrepreneurship, and more. Scroll down to see the complete list.",
   "resume_cmd": "You can download my resume using the button in the navigation.",
@@ -33,6 +33,8 @@
   "chatbot_greeting": "Hello! I'm Peter's virtual assistant. How can I help you today?",
   "chatbot_prompt": "Ask me questions about Peter's experience, skills, or projects!",
   "chatbot_skills": "Peter is skilled in frontend development with React, TypeScript, and Tailwind CSS. He's also proficient in backend technologies like Node.js, and has experience with Linux systems and cybersecurity. Would you like to know more about any specific skill?",
-  "chatbot_contact": "You can contact Peter via email at offtunedlungu@gmail.com, or connect with him on LinkedIn at /in/marcosmwaba. Is there something specific you'd like to discuss with him?",
+  "chatbot_contact": "You can contact Peter via WhatsApp/Phone at +260971169255, email at offtunedlungu@gmail.com, or connect with him on LinkedIn at /in/marcosmwaba. Is there something specific you'd like to discuss with him?",
+  "chatbot_location": "Peter Marcos Mwaba is based in Lusaka, Zambia. That's where Marcos Enterprise operates from as well.",
+  "chatbot_company": "Marcos Enterprise is a tech company founded by Peter Marcos Mwaba. The company focuses on providing software solutions and IT support services.",
   "chatbot_default": "I don't have specific information about that. Would you like to know about Peter's skills, experience, or how to contact him?"
 }

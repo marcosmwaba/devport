@@ -1,7 +1,7 @@
 
 import React, { useState, useRef, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { MessageCircle, Send, X, Bot, User } from 'lucide-react';
+import { MessageCircle, Send, X, Bot, User, Phone, Mail, MapPin } from 'lucide-react';
 import { useToast } from '@/hooks/use-toast';
 import { useLanguage } from '@/contexts/LanguageContext';
 
@@ -22,7 +22,7 @@ const Chatbot: React.FC = () => {
   const [messages, setMessages] = useState<Message[]>([
     {
       id: generateId(),
-      text: "Hello! I'm Peter's virtual assistant. How can I help you today?",
+      text: t('chatbot_greeting') || "Hello! I'm Peter's virtual assistant. How can I help you today?",
       sender: 'bot',
       timestamp: new Date(),
     },
@@ -42,7 +42,7 @@ const Chatbot: React.FC = () => {
     if (!isOpen) {
       toast({
         title: "Chat Assistant",
-        description: "Ask me questions about Peter's experience, skills, or projects!",
+        description: t('chatbot_prompt') || "Ask me questions about Peter's experience, skills, or projects!",
         duration: 3000,
       });
     }
@@ -76,45 +76,84 @@ const Chatbot: React.FC = () => {
       };
       
       setMessages(prev => [...prev, botMessage]);
-    }, 1000);
+    }, 600); // Reduced thinking time for improved responsiveness
   };
   
   const generateBotResponse = (input: string): string => {
-    // Simple rule-based responses
-    if (input.includes('hello') || input.includes('hi') || input.includes('hey')) {
-      return "Hello! I'm Peter's virtual assistant. How can I help you today?";
+    // Enhanced responses with more specific patterns
+    if (input.includes('hello') || input.includes('hi') || input.includes('hey') || input.includes('greetings')) {
+      return "Hello! I'm Peter's virtual assistant. How can I help you today? Feel free to ask about his skills, experience, or how to get in touch with him.";
     }
     
-    if (input.includes('skill') || input.includes('tech') || input.includes('know')) {
-      return "Peter is skilled in frontend development with React, TypeScript, and Tailwind CSS. He's also proficient in backend technologies like Node.js, and has experience with Linux systems and cybersecurity. Would you like to know more about any specific skill?";
+    // Yes pattern - respond with encouragement to ask more questions
+    if (input === 'yes' || input.includes('yes please') || input.includes('yeah')) {
+      return "Great! What would you like to know? I can tell you about Peter's skills, projects, experience, or provide his contact information.";
     }
     
-    if (input.includes('contact') || input.includes('email') || input.includes('reach')) {
-      return "You can contact Peter via email at offtunedlungu@gmail.com, or connect with him on LinkedIn at /in/marcosmwaba. Is there something specific you'd like to discuss with him?";
+    // Location patterns
+    if (input.includes('location') || input.includes('where') || input.includes('based') || input.includes('country') || input.includes('city') || input.includes('live')) {
+      return "Peter Marcos Mwaba is based in Lusaka, Zambia. That's where Marcos Enterprise operates from as well. Would you like his contact information?";
     }
     
-    if (input.includes('project') || input.includes('work') || input.includes('portfolio')) {
-      return "Peter has worked on various projects showcasing his skills in software development and IT support. Check out his GitHub profile for code examples and project repositories.";
+    // Contact information with formatted phone and email
+    if (input.includes('contact') || input.includes('email') || input.includes('reach') || input.includes('phone') || input.includes('call') || input.includes('whatsapp')) {
+      return (
+        "You can contact Peter through these channels:\n\n" +
+        "📱 WhatsApp/Phone: +260971169255\n" +
+        "✉️ Email: offtunedlungu@gmail.com\n" +
+        "🔗 LinkedIn: /in/marcosmwaba\n\n" +
+        "Feel free to reach out with any questions or opportunities!"
+      );
     }
     
-    if (input.includes('experience') || input.includes('background') || input.includes('history')) {
-      return "Peter Marcos Mwaba is a Software Engineer, IT Support Specialist, and CEO of Marcos Enterprise based in Lusaka, Zambia. He combines technical expertise with business leadership to deliver innovative solutions.";
+    // Skill patterns with more details
+    if (input.includes('skill') || input.includes('tech') || input.includes('know') || input.includes('can do')) {
+      return "Peter has a diverse technical arsenal including:\n\n" +
+        "💻 Frontend: React, TypeScript, Tailwind CSS\n" +
+        "🔧 Backend: Node.js, Express, Python\n" +
+        "🛡️ Security: Kali Linux, penetration testing, cybersecurity\n" +
+        "💼 Business: Marketing strategy, leadership, entrepreneurship\n\n" +
+        "Would you like more specific details about any of these areas?";
     }
     
-    if (input.includes('marcos enterprise') || input.includes('company') || input.includes('business')) {
-      return "Marcos Enterprise is a tech company founded by Peter Marcos Mwaba. The company focuses on providing software solutions and IT support services to businesses in Zambia and beyond.";
+    // Project patterns
+    if (input.includes('project') || input.includes('work') || input.includes('portfolio') || input.includes('built')) {
+      return "Peter has worked on various projects showcasing his skills in software development and IT support. His portfolio includes web applications, security solutions, and business systems. You can check out his projects through the portfolio sections or visit his GitHub for code examples.";
     }
     
-    if (input.includes('resume') || input.includes('cv')) {
-      return "You can download Peter's resume using the Resume button in the navigation bar. It contains detailed information about his skills, experience, and qualifications.";
+    // Experience patterns
+    if (input.includes('experience') || input.includes('background') || input.includes('history') || input.includes('career')) {
+      return "Peter Marcos Mwaba has experience as a Software Engineer, IT Support Specialist, and CEO of Marcos Enterprise. He combines technical expertise with business leadership to deliver innovative solutions across various industries. His career spans several years in the tech sector.";
     }
     
-    if (input.includes('thank') || input.includes('thanks')) {
-      return "You're welcome! If you have any more questions about Peter or his work, feel free to ask.";
+    // Company/business patterns
+    if (input.includes('marcos enterprise') || input.includes('company') || input.includes('business') || input.includes('enterprise')) {
+      return "Marcos Enterprise is a tech company founded by Peter Marcos Mwaba. The company focuses on providing software solutions, cybersecurity services, and IT support to businesses in Zambia and beyond. As CEO, Peter leads the company's strategic initiatives and technical direction.";
     }
     
-    // Default response
-    return "I don't have specific information about that. Would you like to know about Peter's skills, experience, or how to contact him?";
+    // Resume/CV patterns
+    if (input.includes('resume') || input.includes('cv') || input.includes('qualification')) {
+      return "You can download Peter's resume using the Resume button in the navigation bar. His CV details his professional experience, education, technical skills, and achievements. If you have specific questions about his qualifications, feel free to ask.";
+    }
+    
+    // Gratitude patterns
+    if (input.includes('thank') || input.includes('thanks') || input.includes('appreciate')) {
+      return "You're welcome! It's my pleasure to assist you. If you have any more questions about Peter or his work, don't hesitate to ask. I'm here to help!";
+    }
+    
+    // Help patterns
+    if (input.includes('help') || input === 'menu' || input === 'options') {
+      return "I can help you with information about:\n\n" +
+        "• Peter's skills and expertise\n" +
+        "• His contact information\n" +
+        "• Professional experience\n" +
+        "• Marcos Enterprise\n" +
+        "• Projects and portfolio\n\n" +
+        "Just ask about any of these topics!";
+    }
+    
+    // Default response with improved suggestions
+    return "I don't have specific information about that. Would you like to know about Peter's skills, experience, contact details, or his company Marcos Enterprise? Feel free to ask me anything specific!";
   };
 
   return (
@@ -176,7 +215,7 @@ const Chatbot: React.FC = () => {
                         : 'bg-terminal-green/10 text-terminal-green border border-terminal-green/20'
                     }`}
                   >
-                    <p className="text-sm">{message.text}</p>
+                    <p className="text-sm whitespace-pre-line">{message.text}</p>
                     <div className="text-xs opacity-60 mt-1 text-right">
                       {message.timestamp.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}
                     </div>
@@ -204,7 +243,11 @@ const Chatbot: React.FC = () => {
                 />
                 <button
                   type="submit"
-                  className="bg-terminal-gray/20 p-2 rounded-md border border-terminal-cyan/30 text-terminal-cyan hover:bg-terminal-cyan/10 transition-colors"
+                  className={`p-2 rounded-md border border-terminal-cyan/30 text-terminal-cyan transition-colors ${
+                    !input.trim() 
+                      ? 'bg-terminal-gray/10 opacity-50 cursor-not-allowed' 
+                      : 'bg-terminal-gray/20 hover:bg-terminal-cyan/10 cursor-pointer'
+                  }`}
                   disabled={!input.trim()}
                 >
                   <Send className="h-5 w-5" />
