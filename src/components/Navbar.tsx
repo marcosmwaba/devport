@@ -1,7 +1,7 @@
 
 import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Menu, X, Terminal as TerminalIcon, Home, Code, UserCircle, Mail, Download } from 'lucide-react';
+import { Menu, X, Terminal as TerminalIcon, Home, UserCircle, Mail, Download } from 'lucide-react';
 import LanguageSelector from './LanguageSelector';
 import { useLanguage } from '@/contexts/LanguageContext';
 
@@ -25,7 +25,6 @@ const Navbar: React.FC = () => {
 
   const navLinks = [
     { name: t('home'), href: '#', icon: <Home className="h-4 w-4" /> },
-    { name: t('projects'), href: '#projects', icon: <Code className="h-4 w-4" /> },
     { name: t('skills'), href: '#skills', icon: <UserCircle className="h-4 w-4" /> },
     { name: t('contact'), href: '#contact', icon: <Mail className="h-4 w-4" /> },
   ];
