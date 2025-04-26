@@ -44,7 +44,7 @@ const HeroSection: React.FC = () => {
             </h1>
             
             <p className="text-lg md:text-xl text-terminal-green/80 max-w-2xl mx-auto md:mx-0">
-              Peter Marcos Mwaba | Software <span className="line-through">Developer</span> Engineer, IT Specialist & CEO of Marcos Enterprise🇿🇲
+              Peter Marcos Mwaba | Software <span className="line-through">Developer</span> Engineer, IT Specialist & CEO of Marcos Enterprise<span className="emoji">🇿🇲</span>
             </p>
           </motion.div>
         </div>
@@ -59,7 +59,7 @@ const HeroSection: React.FC = () => {
           
           <div className="px-4 mb-8 text-sm md:text-base text-terminal-green/90">
             <p className="mb-4">
-              I'm a Software <span className="line-through">Developer</span> Engineer, IT Support Specialist, and CEO of Marcos Enterprise based in Lusaka, Zambia🇿🇲🇿🇲, with a strong background in software engineering. I am passionate about creating efficient, scalable, and robust software solutions that address real-world challenges. My work is rooted in solving complex problems through well-structured, high-quality code and system design.
+              I'm a Software <span className="line-through">Developer</span> Engineer, IT Support Specialist, and CEO of Marcos Enterprise based in Lusaka, Zambia<span className="emoji">🇿🇲🇿🇲</span>, with a strong background in software engineering. I am passionate about creating efficient, scalable, and robust software solutions that address real-world challenges. My work is rooted in solving complex problems through well-structured, high-quality code and system design.
             </p>
             <p className="mb-4">
               In addition to software development, I provide IT support services, ensuring smooth operation and maintenance of systems. I have experience troubleshooting technical issues, optimizing workflows, and enhancing system performance. Whether working on backend systems, databases, or providing hands-on support, I strive to deliver reliable and impactful solutions.

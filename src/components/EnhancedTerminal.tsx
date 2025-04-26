@@ -15,6 +15,13 @@ const AVAILABLE_COMMANDS = [
   'github', 'linkedin', 'email', 'calc', 'color', 'history'
 ];
 
+// Function to wrap emojis in span with emoji class
+const wrapEmojis = (text: string) => {
+  // This regex matches emoji characters
+  const emojiRegex = /(\p{Emoji})/gu;
+  return text.replace(emojiRegex, '<span class="emoji">$1</span>');
+};
+
 const EnhancedTerminal: React.FC = () => {
   const [commandHistory, setCommandHistory] = useState<string[]>([]);
   const [responses, setResponses] = useState<CommandHistoryItem[]>([]);
@@ -94,7 +101,7 @@ const EnhancedTerminal: React.FC = () => {
         response = "BSc Computer Science - University of Zambia (2014-2018)\nCertified Information Security Professional (2019)";
         break;
       case 'weather':
-        response = "Current weather in Lusaka: 🌤️ 28°C, Partly Cloudy";
+        response = "Current weather in Lusaka: <span class='emoji'>🌤️</span> 28°C, Partly Cloudy";
         break;
       case 'joke':
         const jokes = [

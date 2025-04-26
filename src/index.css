@@ -95,6 +95,11 @@
     @apply bg-terminal-dark text-terminal-green font-mono;
   }
 
+  /* Emoji font support */
+  .emoji {
+    font-family: "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+  }
+
   /* Terminal effect - scanlines */
   .scanlines {
     position: fixed;
