@@ -1,4 +1,3 @@
-
 @import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@300;400;500;700&family=Inter:wght@300;400;500;600;700&display=swap');
 
 @tailwind base;
@@ -93,11 +92,18 @@
 
   body {
     @apply bg-terminal-dark text-terminal-green font-mono;
+    font-family: 'Inter', 'JetBrains Mono', 
+      'Apple Color Emoji', 
+      'Segoe UI Emoji', 
+      'Segoe UI Symbol', 
+      'Noto Color Emoji', 
+      sans-serif;
   }
 
-  /* Emoji font support */
+  /* Emoji-specific font support */
   .emoji {
-    font-family: "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+    font-family: 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji', sans-serif;
+    line-height: 1;
   }
 
   /* Terminal effect - scanlines */
